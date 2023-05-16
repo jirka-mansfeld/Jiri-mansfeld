@@ -1,0 +1,99 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    /* co preteka, to skryj */
+    overflow: hidden;
+}
+
+.img1 {
+    background-image: url(img/obr1.jpg);
+}
+
+.img2 {
+    background-image: url(img/obr2.jpg);
+}
+
+.img3 {
+    background-image: url(img/obr3.jpg);
+}
+
+.img4 {
+    background-image: url(img/obr4.jpg);
+}
+
+.img5 {
+    background-image: url(img/obr5.jpg);
+}
+
+.container {
+    display: flex;
+    width: 90vw;
+}
+
+.slide {
+    height: 80vh;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    margin: 6px;
+
+    /* relativni velikost vsech slidu a linearni zmena slidu pri zmene aktivniho slidu */
+    flex: 0.5;
+    transition: flex 0.5s linear;
+
+    position: relative;
+}
+
+.slide h2 {
+    font-size: 25px;
+
+    /* zarovnava absolutne vuci svemu nadrazenemu, musime nadrazenemu dat position relative */
+    position: absolute;
+
+    /* pozicujeme nadpis absolutne ve svem relativnim nadrazenem */
+    bottom: 30px;
+    left: 10px;
+    margin: 0;
+
+    /* pruhlednost textu */
+    opacity: 0;
+}
+
+.slide.active {
+    /* velikost aktivniho slidu vuci ostatnim slidum */
+    flex: 4;
+}
+
+.slide.active h2 {
+    /* zobrazeni nadpisu s lehkym zpozdenim*/
+    opacity: 1 ;
+    transition: opacity 0.5s ease-in 0.5s;
+}
+
+/* upraveni pro mobilni zarizeni */
+@media(max-width: 600px) {
+    .container {
+        width: 100vw;
+    }
+    /* vybrani poslednich dvou slidu, aby display: none (aby nebyli videt) */
+    .slide:nth-of-type(4), .slide:nth-of-type(5) {
+        display: none;
+    }
+}
