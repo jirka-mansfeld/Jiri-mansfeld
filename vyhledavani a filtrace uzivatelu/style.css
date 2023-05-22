@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-container {
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    width: 300px;
+    overflow: hidden;
+}
+
+.header {
+    background-color: rgb(100, 100, 223);
+    color: #fff;
+    padding: 35px 20px;
+}
+
+.filter-sub-heading {
+    /* prepnuti na blokovy element, aby zustal i pri zmene velikosti na vlastnim radku  */
+    display: block;
+
+    margin: 5px 0 20px 0;
+}
+
+.input-filter {
+    border: 0;
+    border-radius: 30px;
+    color: #000;
+    font-size: 15px;
+    padding: 10px 15px;
+    width: 100%;
+    /* zruseni oznaceni pri kliknuti */
+    outline: none;
+}
+
+.user-list {
+    background-color: azure;
+
+    /* zruseni tecek u UL */
+    list-style-type: none;
+    max-height: 400px;
+
+    /* chceme overflow u osy Y, protoze je defaultne zrusen pro cely container */
+    overflow-y: auto;
+}
+
+.user-list li {
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid rgb(223, 222, 222);
+}
+
+.user-list img {
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+}
+
+.user-info {
+    margin-left: 13px;
+}
+
+.user-info h3 {
+    margin-bottom: 10px;
+}
+
+.user-info p {
+    font-size: 14px;
+}
+
+.user-list li.hide {
+    display: none ;
+}
+
