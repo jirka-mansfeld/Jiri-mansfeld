@@ -47,6 +47,7 @@ let comparison = (array, searchText) =>{
     let leftToDos = arrayResults.filter((oneResult) =>{
         return oneResult.competion === false
     })
+    
     let paragraph = document.createElement("p")
     paragraph.textContent = (`Počet úkolů ke splnění: ${leftToDos.length}`)
     document.querySelector(".toDoLeft").appendChild(paragraph)
