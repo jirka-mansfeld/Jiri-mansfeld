@@ -5,6 +5,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from scipy import stats
 import matplotlib.pyplot as plt
+import numpy as np
 
 url = "https://www.opec.org/basket/basketDayArchives.xml"
 
@@ -94,11 +95,10 @@ average_daily_change = grouped_df["DailyChange"].mean()
 # Vytvoření DataFrame s průměrnými hodnotami procentuálního denního pohybu
 result_df = pd.DataFrame({
     "Year": average_daily_change.index,
-    "AverageDailyChange": average_daily_change.values
 })
 
 # Výpočet geometrického průměru
-result_df["GeometricMean"] = stats.gmean(df.groupby(df["data"].dt.year)["PriceChange"].apply(lambda x: x + 100)) - 100
+result_df["GeometricMean"] = grouped_df["DailyChange"].fillna(0).apply(lambda x: stats.gmean(x + 100) - 100)
 
 # Uložení výsledného DataFrame do CSV souboru
 result_df.to_csv("average_daily_change.csv", index=False)
@@ -110,7 +110,7 @@ result_df.to_csv("average_daily_change.csv", index=False)
 grouped_df = pd.read_csv("average_daily_change.csv")
 
 # Vytvoření sloupcového grafu
-plt.bar(grouped_df["Year"], grouped_df["AverageDailyChange"])
+plt.bar(grouped_df["Year"], grouped_df["GeometricMean"])
 
 # Nastavení popisků os a názvu grafu
 plt.xlabel("Year")
