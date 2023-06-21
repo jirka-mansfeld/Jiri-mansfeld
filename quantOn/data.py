@@ -80,28 +80,16 @@ for year in years:
 
 
 
-# Načtení dat z CSV souboru
 df = pd.read_csv("data_with_changes.csv")
-
-# Převod sloupce "Date" na datový typ datetime
 df["data"] = pd.to_datetime(df["data"])
 
-# Seskupení dat podle roku
-grouped_df = df.groupby(df["data"].dt.year)
+df_result = df.groupby(pd.Grouper(key="data", freq="Y"))["DailyChange"].apply(lambda x: stats.gmean(x.dropna() + 100) - 100).reset_index()
 
-# Výpočet průměrné hodnoty procentuálního denního pohybu pro každý rok
-average_daily_change = grouped_df["DailyChange"].mean()
+df_result.columns = ["Year", "GeometricMean"]
 
-# Vytvoření DataFrame s průměrnými hodnotami procentuálního denního pohybu
-result_df = pd.DataFrame({
-    "Year": average_daily_change.index,
-})
+df_result["Year"] = df_result["Year"].dt.year
 
-# Výpočet geometrického průměru
-result_df["GeometricMean"] = grouped_df["DailyChange"].fillna(0).apply(lambda x: stats.gmean(x + 100) - 100)
-
-# Uložení výsledného DataFrame do CSV souboru
-result_df.to_csv("average_daily_change.csv", index=False)
+df_result.to_csv("average_daily_change.csv", index=False)
 
 
 
