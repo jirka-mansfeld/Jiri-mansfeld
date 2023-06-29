@@ -40,10 +40,8 @@ except Exception as e:
 
 
 try:
-    # Načtení dat z CSV souboru
     df = pd.read_csv("data.csv", header=None)
 
-    # Přejmenování sloupců
     df.columns = ["data", "val"]
 
     # Vytvoření sloupce s procentuálním denním pohybem
@@ -52,7 +50,6 @@ try:
     # Vytvoření sloupce s procentuálním vývojem ceny
     df["PriceChange"] = (df["val"] - df["val"].iloc[0]) / df["val"].iloc[0] * 100
 
-    # Uložení dat do nového CSV souboru
     df.to_csv("data_with_changes.csv", index=False)
 
     print("Data byla uložena do souboru data_with_changes.csv.")
@@ -94,7 +91,6 @@ df_result.to_csv("average_daily_change.csv", index=False)
 
 
 
-# Načtení seskupeného DataFrame z CSV souboru
 grouped_df = pd.read_csv("average_daily_change.csv")
 
 # Vytvoření sloupcového grafu
@@ -105,5 +101,4 @@ plt.xlabel("Year")
 plt.ylabel("Average Daily Change")
 plt.title("Average Daily Change by Year")
 
-# Zobrazení grafu
 plt.show()
